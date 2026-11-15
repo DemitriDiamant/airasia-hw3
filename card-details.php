@@ -4,7 +4,7 @@
 
 require_once __DIR__ . '/includes/db.php';
 
-// Get the selected gift card ID
+// Get gift card ID from URL
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
 if (!$id || $id < 1) {
@@ -12,7 +12,7 @@ if (!$id || $id < 1) {
     exit('Invalid gift card ID.');
 }
 
-// Find the gift card in the database
+// Find gift card in database
 $stmt = $pdo->prepare(
     'SELECT cardId, cardName, cardType, cardValue, points
      FROM GIFTCARD
@@ -27,8 +27,10 @@ if (!$card) {
     exit('Gift card not found.');
 }
 
+// Set page title
 $pageTitle = 'Gift Card Details - AirAsia Rewards';
 
+// Include shared layout
 require __DIR__ . '/includes/header.php';
 require __DIR__ . '/includes/nav.php';
 ?>
@@ -37,20 +39,24 @@ require __DIR__ . '/includes/nav.php';
     <h2>Gift Card Details</h2>
 
     <div class="gift-card">
-        <img src="images/gift-card.png"
-             alt="Gift Card">
+
+        <img
+            src="images/gift-card.png"
+            alt="Gift Card"
+        >
 
         <h3>
             <?= htmlspecialchars($card['cardName'], ENT_QUOTES, 'UTF-8') ?>
         </h3>
 
         <p>
-            Type:
+            <strong>Type:</strong>
             <?= htmlspecialchars($card['cardType'], ENT_QUOTES, 'UTF-8') ?>
         </p>
 
         <p>
-            Value: $<?= number_format((float)$card['cardValue'], 2) ?>
+            <strong>Value:</strong>
+            $<?= number_format((float)$card['cardValue'], 2) ?>
         </p>
 
         <p>
@@ -58,20 +64,46 @@ require __DIR__ . '/includes/nav.php';
             <?= number_format((int)$card['points']) ?>
         </p>
 
-        <a class="btn"
-           href="card-update.php?id=<?= (int)$card['cardId'] ?>">
-            Update Gift Card
-        </a>
+        <!-- Update and Delete buttons -->
+        <div style="margin-top: 25px;">
 
-        <a class="btn"
-           href="card-delete.php?id=<?= (int)$card['cardId'] ?>">
-            Delete Gift Card
-        </a>
+            <a
+                href="card-update.php?id=<?= (int)$card['cardId'] ?>"
+                style="display: inline-block;
+                       background-color: #e31b23;
+                       color: #ffffff !important;
+                       -webkit-text-fill-color: #ffffff !important;
+                       padding: 12px 20px;
+                       margin: 5px;
+                       border-radius: 5px;
+                       text-decoration: none;
+                       font-weight: bold;
+                       font-size: 16px;"
+            >Update Gift Card</a>
 
-        <p>
+            <a
+                href="card-delete.php?id=<?= (int)$card['cardId'] ?>"
+                style="display: inline-block;
+                       background-color: #e31b23;
+                       color: #ffffff !important;
+                       -webkit-text-fill-color: #ffffff !important;
+                       padding: 12px 20px;
+                       margin: 5px;
+                       border-radius: 5px;
+                       text-decoration: none;
+                       font-weight: bold;
+                       font-size: 16px;"
+            >Delete Gift Card</a>
+
+        </div>
+
+        <p style="margin-top: 25px;">
             <a href="card-list.php">Back to Gift Card List</a>
         </p>
+
     </div>
 </main>
 
-<?php require __DIR__ . '/includes/footer.php'; ?>
+<?php
+require __DIR__ . '/includes/footer.php';
+?>
