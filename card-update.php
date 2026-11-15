@@ -3,7 +3,7 @@
 // AirAsia Rewards - Update Gift Card
 
 require_once __DIR__ . '/includes/db.php';
-
+require_once __DIR__ . '/includes/validation.php';
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
 if (!$id || $id < 1) {
@@ -42,22 +42,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $points = trim($_POST['points'] ?? '');
 
     // Validate the information
-    if ($name === '' || mb_strlen($name) > 120) {
-        $errors[] = 'Enter a valid gift card name.';
-    }
-
-    if ($type === '') {
-        $errors[] = 'Enter a gift card type.';
-    }
-
-    if (!is_numeric($value) || (float)$value <= 0) {
-        $errors[] = 'Enter a valid card value.';
-    }
-
-    if (filter_var($points, FILTER_VALIDATE_INT) === false
-        || (int)$points <= 0) {
-        $errors[] = 'Enter valid reward points.';
-    }
+$errors = validateGiftCard(
+    $name,
+    $type,
+    $value,
+    $points
+);
 
     // Save the updated gift card
     if (empty($errors)) {

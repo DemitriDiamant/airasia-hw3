@@ -8,10 +8,11 @@ function validateGiftCard($cardName, $cardType, $cardValue, $points) {
         $errors[] = 'Gift card name must be 1 to 120 characters.';
     }
 
-    if (trim($cardType) === '') {
-        $errors[] = 'Gift card type is required.';
-    }
+    $allowedTypes = ['Dining', 'Entertainment', 'Shopping', 'Travel'];
 
+if (!in_array(trim($cardType), $allowedTypes, true)) {
+    $errors[] = 'Select a valid gift card type.';
+}
     if (!is_numeric($cardValue) || (float)$cardValue < 0.01) {
         $errors[] = 'Gift card value must be at least 0.01.';
     }

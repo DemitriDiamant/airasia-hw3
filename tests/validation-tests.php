@@ -20,6 +20,10 @@ $tests = [
         'expected' => false
     ],
     [
+    'name' => 'Invalid gift card type',
+    'data' => ['Test Card', 'InvalidType', '25', '2500'],
+    'expected' => false
+],[
         'name' => 'Negative gift card value',
         'data' => ['Test Card', 'Shopping', '-25', '2500'],
         'expected' => false

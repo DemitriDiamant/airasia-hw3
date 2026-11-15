@@ -2,7 +2,7 @@
 <?php
 // AirAsia Rewards - Add Gift Card
 require_once __DIR__ . '/includes/db.php';
-
+require_once __DIR__ . '/includes/validation.php';
 $errors = [];
 $cardName = '';
 $cardType = '';
@@ -15,21 +15,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cardValue = trim($_POST['cardValue'] ?? '');
     $points = trim($_POST['points'] ?? '');
 
-    if ($cardName === '' || strlen($cardName) > 120) {
-        $errors[] = 'Enter a gift card name of 1 to 120 characters.';
-    }
-
-    if ($cardType === '') {
-        $errors[] = 'Enter a gift card type.';
-    }
-
-    if (!is_numeric($cardValue) || (float)$cardValue <= 0) {
-        $errors[] = 'Enter a valid gift card value.';
-    }
-
-    if (filter_var($points, FILTER_VALIDATE_INT) === false || (int)$points <= 0) {
-        $errors[] = 'Enter valid points required.';
-    }
+    $errors = validateGiftCard(
+    $cardName,
+    $cardType,
+    $cardValue,
+    $points
+);
 
     if (empty($errors)) {
         $stmt = $pdo->prepare(
