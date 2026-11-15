@@ -29,7 +29,7 @@ To run the automated validation tests, enter:
 
 `php tests/validation-tests.php`
 
-Automated testing results: 7 passed, 0 failed.
+Automated testing results: 8 passed, 0 failed.
 
 ## AI Assistance
 I used ChatGPT to help with certain PHP features, file organization, validation testing, and troubleshooting errors. More information is included in `ai-use.txt`.
