@@ -1,0 +1,15 @@
+AI Tool Used:
+ChatGPT (OpenAI)
+
+How AI Supported My Work:
+I used ChatGPT to help me complete certain features of my AirAsia HW3 website. It helped me with parts of the PHP coding, organizing my files in GitHub Codespaces, and connecting features to the database. I also used AI to help test my form validations and make sure the website was working correctly. When I ran into errors, ChatGPT helped me figure out what was wrong and how to fix them. I reviewed the suggestions and tested the features myself to make sure everything worked properly.
+
+Prompts Used:
+1. Help me with certain PHP features for my AirAsia Rewards website.
+2. Help me organize my files and folders in GitHub Codespaces.
+3. Help me test the validation for gift card values and points.
+4. Help me troubleshoot errors in my PHP code.
+5. Help me check that my Add, Update, and Delete features work correctly.
+
+Example of AI Assistance:
+ChatGPT helped me fix issues with my gift card features and button styling. I also used it to help run validation tests and check for errors. After making changes, I tested the website myself to confirm everything worked.
